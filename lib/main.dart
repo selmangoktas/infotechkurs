@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ders7/email-form.dart';
+import 'ders8/web-api.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: EmailViewPage(),
+      home: WebApiView(),
     );
   }
 }
