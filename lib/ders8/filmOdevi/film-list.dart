@@ -44,18 +44,21 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
       ),
       body: StaggeredGridView.countBuilder(
         // shrinkWrap: true,
-        scrollDirection: Axis.vertical,
+        //scrollDirection: Axis.vertical,
+
         crossAxisCount: 4,
         itemCount: flist.length,
         itemBuilder: (BuildContext context, int index) => Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(
-                  left: 5, right: 5, top: index * 2 / 2 == index ? 5 : 10),
-              padding: EdgeInsets.all(50),
-              width: ekranW * 0.5,
-              height: index * 2 / 2 == index ? ekranH * .2 : ekranH * .1,
+              // margin: EdgeInsets.only(                  left: 5, right: 5, top: index * 2 / 2 == index ? 50 : 10),
+              padding: EdgeInsets.all(100),
+              margin: EdgeInsets.all(100),
+              //width: ekranW * 0.5,
+              //height: ekranW * 0.28,
+              // height: index * 2 / 2 == index ? ekranH * .3 : ekranH * .5,
               // MediaQuery.of(context).size.height * 0.2,
               decoration: BoxDecoration(
                 color: Colors.black,
@@ -76,7 +79,7 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Text(''),
+              child: Center(child: Text('')),
             ),
             Container(
               child: Text(
