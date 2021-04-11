@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ders8/odev-api-list.dart';
+import 'ders8/filmOdevi/film-list.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WebApiView(),
+      home: FilmViewBuilder(),
     );
   }
 }
