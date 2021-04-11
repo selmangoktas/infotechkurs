@@ -3,6 +3,29 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+class AlbumModel {
+  var albumId;
+  var id;
+  var title;
+  var imageUrl;
+  var thumbnailUrl;
+
+  AlbumModel({
+    this.albumId,
+    this.id,
+    this.title,
+    this.imageUrl,
+    this.thumbnailUrl,
+  });
+
+  AlbumModel.fromJson(json) {
+    this.albumId = json['albumId'];
+    this.id = json['id'];
+    this.title = json['title'];
+    this.imageUrl = json['url'];
+    this.thumbnailUrl = json['thumbnailUrl'];
+  }
+}
 
 class WebApiView extends StatefulWidget {
   @override
@@ -10,8 +33,7 @@ class WebApiView extends StatefulWidget {
 }
 
 class _WebApiViewState extends State<WebApiView> {
-  var title;
-  var urlImage;
+  AlbumModel newAlbum = AlbumModel();
 
   getData() async {
     Uri url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
@@ -20,8 +42,9 @@ class _WebApiViewState extends State<WebApiView> {
     if (response.statusCode == 200) {
       var list = json.decode(response.body);
       setState(() {
-        title = list[0]['title'];
-        urlImage = list[0]['thumbnailUrl'];
+        newAlbum = AlbumModel.fromJson(list[0]);
+        newAlbum.title = list[0]['title'];
+        newAlbum.thumbnailUrl = list[0]['thumbnailUrl'];
       });
     }
   }
@@ -29,6 +52,7 @@ class _WebApiViewState extends State<WebApiView> {
   @override
   void initState() {
     getData();
+    super.initState();
   }
 
   @override
@@ -44,7 +68,7 @@ class _WebApiViewState extends State<WebApiView> {
               height: MediaQuery.of(context).size.height * .5,
               child: Center(
                 child: Text(
-                  '$title',
+                  newAlbum.title,
                   style: TextStyle(
                     color: Colors.white,
                     wordSpacing: 1,
@@ -54,7 +78,7 @@ class _WebApiViewState extends State<WebApiView> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    urlImage,
+                    newAlbum.thumbnailUrl,
                   ),
                   fit: BoxFit.cover,
                 ),
