@@ -33,8 +33,8 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    var ekranW = MediaQuery.of(context).size.width;
-    var ekranH = MediaQuery.of(context).size.height;
+    //var ekranW = MediaQuery.of(context).size.width;
+    //var ekranH = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
