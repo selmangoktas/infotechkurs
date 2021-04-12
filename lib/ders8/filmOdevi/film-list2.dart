@@ -43,14 +43,23 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
         child: Text(''),
       ),
       body: StaggeredGridView.countBuilder(
+        // shrinkWrap: true,
+        //scrollDirection: Axis.vertical,
+
         crossAxisCount: 4,
         itemCount: flist.length,
-        itemBuilder: (BuildContext context, int index) => new Column(
+        itemBuilder: (BuildContext context, int index) => Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            new Container(
-              padding: EdgeInsets.all(5),
-              width: ekranW,
-              height: index * 2 / 2 == index ? ekranH * 0.5 : ekranH * 0.3,
+            Container(
+              // margin: EdgeInsets.only(                  left: 5, right: 5, top: index * 2 / 2 == index ? 50 : 10),
+              padding: EdgeInsets.all(100),
+              margin: EdgeInsets.all(100),
+              //width: ekranW * 0.5,
+              //height: ekranW * 0.28,
+              // height: index * 2 / 2 == index ? ekranH * .3 : ekranH * .5,
+              // MediaQuery.of(context).size.height * 0.2,
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.all(
@@ -64,13 +73,13 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
                     offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
-              ),
-              child: Center(
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/original' +
-                      flist[index].posterPath,
+                image: DecorationImage(
+                  image: NetworkImage('https://image.tmdb.org/t/p/original/' +
+                      flist[index].posterPath),
+                  fit: BoxFit.cover,
                 ),
               ),
+              child: Center(child: Text('')),
             ),
             Container(
               child: Text(
@@ -79,13 +88,13 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
                   color: Colors.deepPurple[300],
                 ),
               ),
-            ),
+            )
           ],
         ),
-        staggeredTileBuilder: (index) => new StaggeredTile.count(
-            index != 0 ? 2 : 4, index * 2 / 2 != index ? 2 : 1),
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
+        staggeredTileBuilder: (int index) =>
+            new StaggeredTile.count(2, index.isEven ? 2 : 1),
+        mainAxisSpacing: 10.0,
+        crossAxisSpacing: 10.0,
       ),
     );
   }

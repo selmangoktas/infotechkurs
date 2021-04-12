@@ -34,7 +34,7 @@ class WebApiView extends StatefulWidget {
 
 class _WebApiViewState extends State<WebApiView> {
   AlbumModel a = AlbumModel();
-  List<AlbumModel> aList = List<AlbumModel>();
+  List<AlbumModel> aList = [];
 
   getData() async {
     Uri url = Uri.parse('https://jsonplaceholder.typicode.com/photos');
