@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'film-model.dart';
+import 'func.dart';
 
 class FilmViewBuilder extends StatefulWidget {
   @override
@@ -30,107 +31,20 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
       throw Exception('Failed to load post');
   }
 
-  /* @override
+  @override
   void initState() {
     getState();
     super.initState();
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
     var ekranW = MediaQuery.of(context).size.width;
     var ekranH = MediaQuery.of(context).size.height;
     return Scaffold(
-      drawer: Container(
-        width: ekranW * .7,
-        color: Colors.white,
-        child: Drawer(
-          child: Container(
-            child: ListView.builder(
-              itemCount: flist.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    index == 0
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                                Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: Text(
-                                    'Trending Films List',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      decorationColor: Colors.pink,
-                                      decorationStyle:
-                                          TextDecorationStyle.solid,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: Text(
-                                    flist[index].name,
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      decorationColor: Colors.pink,
-                                      decorationStyle:
-                                          TextDecorationStyle.solid,
-                                    ),
-                                  ),
-                                ),
-                              ])
-                        : Container(
-                            margin: EdgeInsets.all(5),
-                            child: Text(
-                              flist[index].name,
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                decorationColor: Colors.pink,
-                                decorationStyle: TextDecorationStyle.solid,
-                              ),
-                            ),
-                          ),
-                    Divider(),
-                  ],
-                );
-              },
-            ),
-          ),
-        ),
-      ),
+      drawer: buildDrawerContainer(ekranW, flist),
 
-      appBar: AppBar(
-        title: Row(
-          children: [
-            /* Icon(
-              Icons.menu,
-              color: Colors.purple[700],
-            ),*/
-            SizedBox(
-              width: 30,
-            ),
-            Text(
-              "Trend Films",
-              style: TextStyle(
-                color: Colors.purple[700],
-              ),
-            ),
-          ],
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.purple[700],
-        ),
-        backgroundColor: Colors.white,
-      ),
+      appBar: buildPurpleAppBar(),
       // drawer: Drawer(),
       body: Container(
         child: FutureBuilder(
@@ -166,7 +80,7 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(
                                   index == 3
-                                      ? Radius.circular(50)
+                                      ? Radius.circular(25)
                                       : Radius.circular(20),
                                 ),
                                 image: DecorationImage(
