@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:infotechkurs/ders8/filmOdevi/film-detail-view.dart';
 import 'film-model.dart';
 import 'func.dart';
 
@@ -14,7 +15,7 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
 
 //FilmModel.fromJson(json);
 
-  getState() async {
+  Future<List<FilmModel>> getState() async {
     Uri url = Uri.parse(
         'https://api.themoviedb.org/3/tv/airing_today?api_key=79f9638dc1bcf9a4e5a09db68640db20&language=tr-TR&page=1');
     final responpe = await http.get(url);
@@ -31,11 +32,11 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
       throw Exception('Failed to load post');
   }
 
-  @override
+  /*@override
   void initState() {
     getState();
     super.initState();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,27 @@ class _FilmViewBuilderState extends State<FilmViewBuilder> {
                 //itemCount: snapshot.data.len,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      final snackBar = SnackBar(
+                        content: Text(flist[index].name + ' filmine git'),
+                        action: SnackBarAction(
+                          label: 'İleri',
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return new FilmDetailView(
+                                  filmId: flist[index].id,
+                                );
+                              },
+                            ));
+                          },
+                        ),
+                      );
+
+                      // Find the ScaffoldMessenger in the widget tree
+                      // and use it to show a SnackBar.
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
                     child: Container(
                       child: Stack(
                         alignment: Alignment.bottomRight,
