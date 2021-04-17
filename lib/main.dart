@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:infotechkurs/ders9/api-get.dart';
 
-import 'ders8/filmOdevi/film-list.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FilmViewBuilder(),
+      home: ApiGetView(),
     );
   }
 }
