@@ -12,6 +12,7 @@ class SqlViewPage extends StatefulWidget {
 }
 
 class _SqlViewPageState extends State<SqlViewPage> {
+  TextEditingController tcont = TextEditingController();
   DatabaseHelper databaseHelper = DatabaseHelper();
   var data;
 
@@ -74,6 +75,7 @@ class _SqlViewPageState extends State<SqlViewPage> {
           children: [
             Container(
               child: TextFormField(
+                controller: tcont,
                 decoration: InputDecoration(hintText: 'Yeni Kullanıcı Ekle'),
                 onChanged: (value) {
                   setState(() {
@@ -95,6 +97,7 @@ class _SqlViewPageState extends State<SqlViewPage> {
             ),
             FloatingActionButton(
               onPressed: () {
+                tcont.text = '';
                 databaseHelper.addUser(User(data));
                 getAllUser();
               },
