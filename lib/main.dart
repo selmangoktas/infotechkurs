@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:infotechkurs/sqllite/theme/theme_state.dart';
 import 'package:infotechkurs/sqllite/view/view_sql.dart';
 
 void main() {
@@ -7,15 +8,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final ThemeState themeState = Get.put(ThemeState());
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.purple[700], // navigation bar color
-        statusBarColor: Colors.white,
-        systemNavigationBarDividerColor: Colors.purple[700] // status bar color
-        ));
-    return MaterialApp(
+    return GetMaterialApp(
+      title: 'Flutter Demo',
+      theme: themeState.currentTheme,
       debugShowCheckedModeBanner: false,
       home: SqlViewPage(),
     );

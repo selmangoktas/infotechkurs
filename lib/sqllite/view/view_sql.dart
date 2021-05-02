@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:infotechkurs/sqllite/helper/database_helper.dart';
 import 'package:infotechkurs/sqllite/models/user.dart';
+import 'package:infotechkurs/sqllite/theme/app_darkTheme.dart';
+import 'package:infotechkurs/sqllite/theme/app_lightTheme.dart';
+import 'package:infotechkurs/sqllite/theme/theme_state.dart';
 
 class SqlViewPage extends StatefulWidget {
   @override
@@ -14,7 +18,7 @@ class _SqlViewPageState extends State<SqlViewPage> {
   List<User> userList = [];
   getAllUser() {
     userList.clear();
-     databaseHelper.getUser().then((users) {
+    databaseHelper.getUser().then((users) {
       //print(users);
       setState(() {
         for (var item in users) {
@@ -36,7 +40,33 @@ class _SqlViewPageState extends State<SqlViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Flutter Sql Lite '),
+        actions: [
+          GetBuilder<ThemeState>(
+            builder: (val) {
+              return InkWell(
+                onTap: () {
+                  val.changeTheme(
+                    val.currentTheme == appLightTheme
+                        ? appDarkTheme
+                        : appLightTheme,
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Icon(
+                    val.currentTheme == appLightTheme
+                        ? Icons.lightbulb
+                        : Icons.lightbulb_outline,
+                    color: Colors.white,
+                  ),
+                ),
+              );
+            },
+          )
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -52,14 +82,16 @@ class _SqlViewPageState extends State<SqlViewPage> {
                 },
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: userList.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(userList[index].name ?? 'boş veri geldi'),
-                );
-              },
+            SingleChildScrollView(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: userList.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(userList[index].name ?? 'boş veri geldi'),
+                  );
+                },
+              ),
             ),
             FloatingActionButton(
               onPressed: () {
@@ -67,7 +99,6 @@ class _SqlViewPageState extends State<SqlViewPage> {
                 getAllUser();
               },
               tooltip: 'ekleme',
-              
             )
           ],
         ),
