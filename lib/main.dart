@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:infotechkurs/ders9/api-get.dart';
-
+import 'package:infotechkurs/sqllite/view/view_sql.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ApiGetView(),
+      home: SqlViewPage(),
     );
   }
 }

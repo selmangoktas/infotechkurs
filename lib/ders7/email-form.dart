@@ -68,7 +68,7 @@ class _EmailViewPageState extends State<EmailViewPage> {
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ))
                         : CircleAvatar(
-                            backgroundImage: new FileImage(_image),
+                            backgroundImage: FileImage(_image),
                             radius: 200.0,
                           ),
                   ),
@@ -95,7 +95,7 @@ class _EmailViewPageState extends State<EmailViewPage> {
                   validator: (value) {
                     _adsoyad = value;
                     if (value.length < 3) {
-                      _uyari = "3 Karakterden fazla giriniz";
+                      _uyari = '3 Karakterden fazla giriniz';
                     } else {
                       _uyari = null;
                     }
@@ -106,7 +106,7 @@ class _EmailViewPageState extends State<EmailViewPage> {
                     _adsoyad = value;
                     setState(() {
                       if (value.length < 3) {
-                        _uyari = "3 karakterden fazla bilgi giriniz.";
+                        _uyari = '3 karakterden fazla bilgi giriniz.';
                       } else {
                         _uyari = null;
                       }
